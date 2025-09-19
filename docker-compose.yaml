@@ -1,0 +1,11 @@
+version: '3.8'
+services:
+  db:
+    image: postgres:15
+    restart: always # Ensures the container restarts if it stops
+    environment:
+      POSTGRES_DB: employee # Sets the default database name
+      POSTGRES_USER: user # Sets the database user
+      POSTGRES_PASSWORD: user # Sets the database password
+    ports:
+      - "5432:5432" # Maps host port 5432 to container port 5432
