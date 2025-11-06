@@ -4,6 +4,7 @@ import com.br.employee.model.Employee;
 import com.br.employee.service.EmployeeService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -16,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class EmployeeController {
 
     @Autowired
-    EmployeeService employeeService;
+    private EmployeeService employeeService;
 
     @PostMapping(value = "/create")
     public ResponseEntity<?> createEmployee(@RequestBody Employee employee) {
@@ -28,6 +29,12 @@ public class EmployeeController {
     public ResponseEntity<?> getEmployee(@RequestParam(name = "cpf") Integer cpf) {
         Employee employee = employeeService.getEmployeeByCpf(cpf);
         return ResponseEntity.ok().body(employee);
+    }
+
+    @DeleteMapping
+    public ResponseEntity<?> deleteEmployee(@RequestParam(name = "cpf") Integer cpf) {
+        employeeService.deleteEmployeeBy(cpf);
+        return ResponseEntity.accepted().build();
     }
 
 }

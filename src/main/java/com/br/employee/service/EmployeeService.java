@@ -33,4 +33,12 @@ public class EmployeeService {
         return employee1;
     }
 
+    public void deleteEmployeeBy(Integer cpf) {
+        final var employee1 = employeeRepository.findByCpf(cpf);
+        if(employee1 == null) {
+            throw new UserNotFoundException("User not found");
+        }
+        employeeRepository.delete(employee1);
+    }
+
 }
